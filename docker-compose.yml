@@ -1,0 +1,6 @@
+version: '3.8'
+
+services:
+  telegram-python-bot:
+    restart: unless-stopped
+    image: tom/telegram-python-bot-docker:latest
