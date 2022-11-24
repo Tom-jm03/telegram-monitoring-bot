@@ -12,7 +12,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def monitoring(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context._user_id == 1927247333:
-        stats = await get_monitoring_stats()
+        stats = await get_monitoring_stats(URL)
         await update.message.reply_text(stats)
     else:
         await update.message.reply_text("You are not allowed to use this command")
