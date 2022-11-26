@@ -13,7 +13,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def monitoring(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context._user_id == 1927247333:
         stats = await get_monitoring_stats(URL)
-        await update.message.reply_text(stats)
+        await update.message.reply_text(f"CPU-Temperatur: {stats[0]}°C \nRAM {stats[1]}GB gesamt, {stats[2]}GB belegt, {stats[3]}GB frei \nLoad: {stats[4]}, {stats[5]}, {stats[6]}")
     else:
         await update.message.reply_text("You are not allowed to use this command")
 
