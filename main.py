@@ -1,8 +1,9 @@
-import telegram, asyncio, os, aiohttp
+import os
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
 from functions import get_monitoring_stats
+from datetime import datetime, timedelta
 load_dotenv()
 Token = os.getenv('Token')
 URL = os.getenv('URL')
@@ -13,7 +14,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def monitoring(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context._user_id == 1927247333:
         stats = await get_monitoring_stats(URL)
-        await update.message.reply_text(f"CPU-Temperatur: {stats[0]}°C \nRAM {stats[1]}GB gesamt, {stats[2]}GB belegt, {stats[3]}GB frei \nLoad: {stats[4]}, {stats[5]}, {stats[6]}")
+        dt = datetime.fromtimestamp(stats[7])
+        await update.message.reply_text(f"CPU-Temperatur: {stats[0]}°C \nRAM {stats[1]}GB gesamt, {stats[2]}GB belegt, {stats[3]}GB frei \nLoad: {stats[4]}, {stats[5]}, {stats[6]}\n\nZeitpunkt: {dt.strftime('%H:%M:%S %d.%m.%Y')}")
+
     else:
         await update.message.reply_text("You are not allowed to use this command")
 

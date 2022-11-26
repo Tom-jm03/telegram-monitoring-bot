@@ -11,4 +11,5 @@ async def get_monitoring_stats(url):
             load_1m = res[1][0]
             load_5m = res[1][1]
             load_15m = res[1][2]
-            return [cpu_temp, ram_total, ram_used, ram_free, load_1m, load_5m, load_15m]
+            time = res[4]
+            return [cpu_temp, ram_total, ram_used, ram_free, load_1m, load_5m, load_15m, time]
