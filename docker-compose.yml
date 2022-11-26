@@ -4,3 +4,5 @@ services:
   telegram-python-bot:
     restart: unless-stopped
     image: tom/telegram-python-bot-docker:latest
+    environment:
+      - TZ=Europe/Berlin
