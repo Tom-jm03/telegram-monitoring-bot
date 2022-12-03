@@ -7,13 +7,15 @@ from datetime import datetime, timedelta
 load_dotenv()
 Token = os.getenv('Token')
 URL = os.getenv('URL')
+user = os.getenv('user')
+password = os.getenv('password')
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context._user_id == 1927247333:
         print("Admin contacted me")
 
 async def monitoring(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context._user_id == 1927247333:
-        stats = await get_monitoring_stats(URL)
+        stats = await get_monitoring_stats(URL, user, password)
         dt = datetime.fromtimestamp(stats[7])
         await update.message.reply_text(f"CPU-Temperatur: {stats[0]}°C \nRAM {stats[1]}GB gesamt, {stats[2]}GB belegt, {stats[3]}GB frei \nLoad: {stats[4]}, {stats[5]}, {stats[6]}\n\nZeitpunkt: {dt.strftime('%H:%M:%S %d.%m.%Y')}")
 

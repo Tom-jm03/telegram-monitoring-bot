@@ -1,8 +1,9 @@
 import aiohttp
 
-async def get_monitoring_stats(url):
+
+async def get_monitoring_stats(url, user, password):
     async with aiohttp.ClientSession() as cs:
-        async with cs.get(url) as r:
+        async with cs.get(url, auth=aiohttp.BasicAuth(user, password)) as r:
             res = await r.json()
             cpu_temp = round(res[0]["k10temp"][0][1], 1)
             ram_total = round((((res[2][0] / 1024) / 1024) / 1024), 1) # round to 2 decimal places
